@@ -11,7 +11,7 @@ const NewArrivalsSection = async () => {
     ` ${process.env.NEXT_PUBLIC_API_URL}/api/products/products`,
     {
       method: "GET",
-      cache: "no-cache",
+      cache: "no-store",
     }
   );
 
