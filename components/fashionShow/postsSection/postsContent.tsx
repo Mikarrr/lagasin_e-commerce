@@ -31,10 +31,10 @@ const PostsPageContent = ({
   };
 
   const getThumbnailUrl = (post: Post) => {
-    const media = post._embedded["wp:featuredmedia"]?.[0];
+    const media = post._embedded?.["wp:featuredmedia"]?.[0]; // Dodajemy optional chaining
     return media && media.media_details?.sizes?.full?.source_url
       ? media.media_details.sizes.full.source_url
-      : "";
+      : "/default-image.jpg"; // Możesz ustawić domyślny obraz, jeśli brak zdjęcia
   };
 
   return (

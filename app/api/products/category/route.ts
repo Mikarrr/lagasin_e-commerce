@@ -8,7 +8,7 @@ export async function GET() {
 
   while (true) {
     const response = await fetch(
-      `${process.env.WORDPRESS_API_URL}/wp-json/wc/v3/products/categories?consumer_key=${process.env.WOO_API_CONSUMER}&consumer_secret=${process.env.WOO_API_SECRET}&per_page=${perPage}&page=${page}`,
+      `${process.env.WORDPRESS_API_URL}/wp-json/wc/v3/products/categories?consumer_key=${process.env.WOO_API_CONSUMER}&consumer_secret=${process.env.WOO_API_SECRET}&per_page=${perPage}&page=${page}&_fields=id,name,slug,parent,count`,
       { cache: "no-cache" }
     );
 
@@ -22,7 +22,7 @@ export async function GET() {
     const categories: Category[] = await response.json();
 
     if (categories.length === 0) {
-      break; // Stop if no more categories are available
+      break;
     }
 
     allCategories = allCategories.concat(categories);

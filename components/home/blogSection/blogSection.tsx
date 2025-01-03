@@ -1,4 +1,3 @@
-// app/components/BlogSection/index.tsx
 import React from "react";
 import "./style.css";
 import ButtonRevFill from "@/components/utils/buttonRevFill/page";
@@ -10,8 +9,9 @@ import { Post } from "@/app/api/types/posts";
 
 // Funkcja do pobierania URL miniaturki
 const getThumbnailUrl = (post: Post) => {
-  const media = post._embedded["wp:featuredmedia"]?.[0];
-  return media?.media_details?.sizes?.full?.source_url || "";
+  // Check if wp:featuredmedia exists and has the expected structure
+  const media = post._embedded?.["wp:featuredmedia"]?.[0];
+  return media?.media_details?.sizes?.full?.source_url || ""; // Return the URL or fallback to empty string
 };
 
 const BlogSection = async () => {
@@ -40,6 +40,10 @@ const BlogSection = async () => {
       const category = categories.find((cat) => cat.id === categoryId);
       return category ? decode(category.name) : "Uncategorized";
     };
+
+    if (!posts.length) {
+      return <div>No posts available</div>; // Handle case if no posts are returned
+    }
 
     return (
       <section className="blog-container">
@@ -75,7 +79,7 @@ const BlogSection = async () => {
                 <div
                   className="text-l"
                   dangerouslySetInnerHTML={{
-                    __html: decode(posts[0].excerpt.rendered),
+                    __html: decode(posts[0].excerpt?.rendered || ""),
                   }}
                 />
               </div>
@@ -94,7 +98,7 @@ const BlogSection = async () => {
                   <h3>{decode(post.title.rendered)}</h3>
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: decode(post.excerpt.rendered),
+                      __html: decode(post.excerpt?.rendered || ""),
                     }}
                   />
                 </div>
