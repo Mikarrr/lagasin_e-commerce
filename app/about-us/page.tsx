@@ -1,9 +1,10 @@
 import React from "react";
-import HeroAboutUsSection from "@/components/aboutUs/heroAboutUsSection/heroAboutUsSection";
-import ExpandAboutUsSection from "@/components/aboutUs/ExpandAboutUsSection/ExpandAboutUsSection";
+
 import FaqSection from "@/components/utils/faq/faq";
 import ContactSection from "@/components/contact/contactSection/contactSection";
 import { Metadata } from "next";
+import HeroAboutUsSection from "@/components/aboutUs/heroAboutUsSection/heroAboutUsSection";
+import ExpandAboutUsSection from "@/components/aboutUs/expandAboutUsSection/expandAboutUsSection";
 
 export const metadata: Metadata = {
   metadataBase: new URL("http://localhost:3000"),
@@ -62,6 +63,7 @@ const About = () => {
     <main>
       <HeroAboutUsSection />
       <ExpandAboutUsSection />
+
       <FaqSection />
       <ContactSection />
     </main>
