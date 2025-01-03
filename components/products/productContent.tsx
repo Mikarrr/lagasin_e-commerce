@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { Product } from "@/app/api/types/product";
 import { Category } from "@/app/api/types/productCategory";
 import "./style.css";
@@ -27,44 +27,51 @@ const ProductContent = ({
     "name-asc" | "name-desc" | "price-asc" | "price-desc"
   >("name-asc");
 
-  const handleCategoryChange = (categoryId: number | null) => {
+  const handleCategoryChange = useCallback((categoryId: number | null) => {
     setSelectedCategory(categoryId);
-  };
+  }, []);
 
-  const handleSortChange = (
-    sortOption: "name-asc" | "name-desc" | "price-asc" | "price-desc"
-  ) => {
-    setSortOption(sortOption);
-  };
+  const handleSortChange = useCallback(
+    (sortOption: "name-asc" | "name-desc" | "price-asc" | "price-desc") => {
+      setSortOption(sortOption);
+    },
+    []
+  );
 
   // Filtrowanie produktów na podstawie wybranej kategorii
-  const filteredProducts = selectedCategory
-    ? products.filter((product) =>
-        product.categories.some((category) => category.id === selectedCategory)
-      )
-    : products;
+  const filteredProducts = useMemo(() => {
+    return selectedCategory
+      ? products.filter((product) =>
+          product.categories.some(
+            (category) => category.id === selectedCategory
+          )
+        )
+      : products;
+  }, [products, selectedCategory]);
 
   // Funkcja do sortowania produktów
-  const sortProducts = (products: Product[]) => {
+  const sortedProducts = useMemo(() => {
     switch (sortOption) {
       case "name-asc":
-        return [...products].sort((a, b) => a.name.localeCompare(b.name));
+        return [...filteredProducts].sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
       case "name-desc":
-        return [...products].sort((a, b) => b.name.localeCompare(a.name));
+        return [...filteredProducts].sort((a, b) =>
+          b.name.localeCompare(a.name)
+        );
       case "price-asc":
-        return [...products].sort(
+        return [...filteredProducts].sort(
           (a, b) => parseFloat(a.price) - parseFloat(b.price)
         );
       case "price-desc":
-        return [...products].sort(
+        return [...filteredProducts].sort(
           (a, b) => parseFloat(b.price) - parseFloat(a.price)
         );
       default:
-        return products;
+        return filteredProducts;
     }
-  };
-
-  const sortedProducts = sortProducts(filteredProducts);
+  }, [filteredProducts, sortOption]);
 
   return (
     <section className="products-content-container">
@@ -99,6 +106,7 @@ const ProductContent = ({
                     className="image"
                     width={500}
                     height={500}
+                    priority // ensures the image is prioritized for loading
                   />
                   <div className="description">
                     <div>

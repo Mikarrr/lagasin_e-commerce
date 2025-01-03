@@ -7,7 +7,7 @@ const ProductsSection = async () => {
     ` ${process.env.NEXT_PUBLIC_API_URL}/api/products/products`,
     {
       method: "GET",
-      cache: "no-store",
+      cache: "no-cache",
     }
   );
 
@@ -17,7 +17,7 @@ const ProductsSection = async () => {
     ` ${process.env.NEXT_PUBLIC_API_URL}/api/products/category`,
     {
       method: "GET",
-      cache: "no-store",
+      cache: "no-cache",
     }
   );
 

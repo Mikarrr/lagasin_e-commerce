@@ -7,10 +7,17 @@ export async function GET(
 ) {
   const { slug } = params;
 
+  if (!slug) {
+    return NextResponse.json(
+      { error: "Product slug is required" },
+      { status: 400 }
+    );
+  }
+
   try {
     const response = await fetch(
       `${process.env.WORDPRESS_API_URL}/wp-json/wc/v3/products?slug=${slug}&consumer_key=${process.env.WOO_API_CONSUMER}&consumer_secret=${process.env.WOO_API_SECRET}`,
-      { cache: "no-store" }
+      { cache: "no-cache" }
     );
 
     if (!response.ok) {
