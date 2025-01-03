@@ -1,0 +1,146 @@
+/* Podstawowe style dla desktopów */
+.posts-section-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0em 2em 8em 2em;
+  gap: 20px;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.posts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.post {
+  flex: 0 1 calc(33.333% - 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 2em;
+}
+
+.post-title {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.post-image {
+  height: 38vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+}
+
+.post-details-up,
+.post-details-down {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.post-details-up {
+  gap: 5px;
+}
+
+.post-details-down {
+  gap: 15px;
+}
+
+.category {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.category-filter::placeholder {
+  color: gray;
+}
+
+.category-filter:focus {
+  outline: none;
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  min-width: 400px;
+}
+.filter-container {
+  position: relative;
+  display: block;
+  min-width: 400px;
+}
+
+.category-filter {
+  width: 100%;
+  padding: 1em 1.5em;
+  padding-right: 10px; /* Miejsce na strzałkę */
+  font-size: 14px;
+  border: 1px solid black;
+  border-radius: 0.5em;
+  text-transform: uppercase;
+  background-color: rgb(219, 219, 219);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.filter-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 1.5em;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 6px;
+  background-image: url("/arrow.svg");
+  background-size: cover;
+  pointer-events: none;
+}
+
+/* Media query dla tabletów */
+@media (max-width: 1024px) {
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .post {
+    flex: 0 1 calc(50% - 15px); /* Dwa posty obok siebie */
+    margin-bottom: 1.5em;
+  }
+
+  .post-image {
+    height: 30vh;
+  }
+}
+
+/* Media query dla telefonów */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .post {
+    flex: 100%; /* Jedno zdjęcie na cały ekran */
+    margin-bottom: 1em;
+  }
+
+  .post-image {
+    height: 25vh;
+  }
+}

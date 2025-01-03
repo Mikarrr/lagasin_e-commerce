@@ -1,0 +1,33 @@
+.register-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  padding: 8em 2em 2em 2em;
+  z-index: 1;
+  gap: 30px;
+}
+.register-container-up,
+.register-container-down {
+  display: flex;
+  flex-direction: column;
+}
+.register-container-up {
+  width: 60%;
+}
+.register-container-down {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .register-container-up {
+    width: 85%;
+  }
+}
+
+@media (max-width: 724px) {
+  .register-container-up {
+    width: 100%;
+  }
+}

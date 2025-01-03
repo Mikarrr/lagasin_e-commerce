@@ -1,0 +1,38 @@
+.rev-button {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  transition: transform 0.25s ease-in-out;
+}
+
+.rev-button p {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: left;
+  transition: transform 0.25s ease-in-out;
+  line-height: 100% !important;
+  font-weight: 500;
+}
+
+.rev-button p:first-child {
+  transform: translateY(0);
+}
+
+.rev-button p:last-child {
+  transform: translateY(0);
+}
+
+.rev-button:hover p:first-child {
+  transform: translateY(-120%);
+}
+.rev-button:hover p:last-child {
+  transform: translateY(-100%);
+}
+.rev-button:active {
+  transform: scale(0.96);
+}

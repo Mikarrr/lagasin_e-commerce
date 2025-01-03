@@ -1,0 +1,33 @@
+.contact-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  padding: 8em 2em 2em 2em;
+  z-index: 1;
+  gap: 30px;
+}
+.contact-container-up,
+.contact-container-down {
+  display: flex;
+  flex-direction: column;
+}
+.contact-container-up {
+  width: 60%;
+}
+.contact-container-down {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .contact-container-up {
+    width: 85%;
+  }
+}
+
+@media (max-width: 724px) {
+  .contact-container-up {
+    width: 100%;
+  }
+}

@@ -1,0 +1,16 @@
+.scroll-down {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+  position: absolute;
+  bottom: 8em;
+  left: -4em;
+  transform: rotate(-90deg);
+  align-items: center;
+}
+.scroll-down img {
+  transform: rotate(90deg);
+}
+.scroll-down p {
+  color: white;
+}

@@ -1,0 +1,33 @@
+.login-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  padding: 8em 2em 2em 2em;
+  z-index: 1;
+  gap: 30px;
+}
+.login-container-up,
+.login-container-down {
+  display: flex;
+  flex-direction: column;
+}
+.login-container-up {
+  width: 60%;
+}
+.login-container-down {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .login-container-up {
+    width: 85%;
+  }
+}
+
+@media (max-width: 724px) {
+  .login-container-up {
+    width: 100%;
+  }
+}

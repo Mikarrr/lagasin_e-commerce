@@ -1,0 +1,50 @@
+.rev-button-fill {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em 2.5em;
+  border-radius: calc(0.3rem - 1px);
+  transition: transform 0.25s ease-in-out;
+  border: 0.109rem solid black;
+}
+
+.rev-button-fill:active {
+  transform: scale(0.98);
+}
+
+.rev-button-fill-content {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  transition: transform 0.25s ease-in-out;
+}
+
+.rev-button-fill-content p {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: left;
+  transition: transform 0.25s ease-in-out;
+  line-height: 100% !important;
+  font-weight: 500;
+}
+
+.rev-button-fill-content p:first-child {
+  transform: translateY(0);
+}
+
+.rev-button-fill-content p:last-child {
+  transform: translateY(0);
+}
+
+.rev-button-fill:hover p:first-child {
+  transform: translateY(-120%);
+}
+.rev-button-fill:hover p:last-child {
+  transform: translateY(-100%);
+}

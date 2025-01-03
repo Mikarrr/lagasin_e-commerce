@@ -1,0 +1,67 @@
+.expand-about-us-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 8em;
+  padding: 8em 2em 2em 2em;
+  z-index: 1;
+  gap: 30px;
+}
+
+.expand-about-us-container-up {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 60px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.image-large {
+  height: 120vh;
+  width: 100%;
+  background-image: url("/exp-about-us.webp");
+  background-size: cover;
+  background-position: center;
+  border-radius: calc(0.3rem - 1px);
+}
+.expand-about-us-container-down {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 50%;
+  gap: 60px;
+}
+.image-small {
+  height: 100vh;
+  width: 100%;
+  background-image: url("/exp2-about-us.webp");
+  background-size: cover;
+  background-position: center;
+  border-radius: calc(0.3rem - 1px);
+}
+
+@media (max-width: 1024px) {
+  .expand-about-us-container {
+    flex-direction: column;
+    gap: 100px;
+  }
+  .expand-about-us-container-up,
+  .expand-about-us-container-down {
+    width: 100%;
+  }
+  .expand-about-us-container-down {
+    flex-direction: column-reverse;
+  }
+  .image-large,
+  .image-small {
+    height: 70vh;
+  }
+}
+@media (max-width: 724px) {
+  .image-large,
+  .image-small {
+    height: 50vh;
+  }
+}

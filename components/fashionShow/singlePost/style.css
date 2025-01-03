@@ -1,0 +1,73 @@
+.single-post-hero-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 85vh;
+  margin-top: 4em;
+  padding: 2em 2em;
+}
+
+.single-post-hero-container-bg {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  background-image: url("/single-post.webp");
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: 22%;
+  border-radius: calc(0.3rem - 1px);
+  height: 85vh;
+  padding: 2em 2em;
+}
+
+.single-post-hero-container-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: calc(0.3rem - 1px);
+  z-index: -1;
+}
+
+.single-post-hero-container-up {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.single-post-hero-container-up h1 {
+  color: white;
+  text-align: center;
+}
+.single-post-hero-container-up p {
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.post-description {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 6em 2em 2em 2em;
+}
+.single-post-hero-fashion-show-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  padding: 2em 2em;
+  gap: 10px;
+}

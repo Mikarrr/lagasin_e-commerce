@@ -1,0 +1,143 @@
+.faq-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 5em;
+  padding: 8em 2em 2em 2em;
+  z-index: 1;
+  gap: 50px;
+}
+.faq-container-left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 50px;
+}
+.faq-container-left div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faq-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.faq-questions div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.faq-questions-container {
+  gap: 20px !important;
+}
+.faq-questions hr {
+  border-top: 1px solid black;
+}
+.faq-container-right {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.image-faq-small {
+  height: 60vh;
+  width: 100%;
+  background-image: url("/faq.webp");
+  background-size: cover;
+  background-position: center;
+  border-radius: calc(0.3rem - 1px);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  opacity: 0;
+  color: gray;
+}
+
+.faq-answer.show {
+  max-height: 110px;
+  opacity: 1;
+  color: black;
+}
+
+.faq-answer.hide {
+  max-height: 0;
+  opacity: 0;
+  color: gray;
+}
+
+.arrow-icon {
+  transition: transform 0.3s ease;
+}
+
+.arrow-icon.rotate {
+  transform: rotate(180deg);
+}
+
+.faq-questions button {
+  display: flex;
+  justify-content: space-between;
+  background: none;
+  text-align: left;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.faq-questions .text-l {
+  color: gray;
+  transition: color 0.3s ease;
+}
+
+.faq-questions .text-l.open {
+  color: black;
+}
+
+.faq-questions .arrow-icon {
+  transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+.faq-questions .arrow-icon.rotate {
+  transform: rotate(180deg);
+}
+
+.faq-questions hr {
+  border: 0;
+  border-top: 1px solid gray;
+  transition: border-color 0.3s ease;
+}
+
+.faq-questions hr.expand {
+  border-top: 1px solid black;
+}
+
+.faq-questions .arrow-icon path {
+  transition: stroke 0.3s ease;
+  stroke: gray;
+}
+
+.faq-questions .arrow-icon.rotate path {
+  stroke: black;
+}
+
+@media (max-width: 1024px) {
+  .faq-container {
+    flex-direction: column;
+    width: 100%;
+    gap: 50px;
+  }
+
+  .faq-container-left,
+  .faq-container-right {
+    width: 100%;
+  }
+
+  .faq-answer.show {
+    max-height: 300px;
+  }
+}

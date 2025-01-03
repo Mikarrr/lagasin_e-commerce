@@ -1,0 +1,163 @@
+.products-content-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 6em;
+  padding: 2em 2em;
+  gap: 50px;
+}
+
+.products-con {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  gap: 15px;
+  position: relative;
+}
+.products-filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.products-main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: calc(0.3rem - 1px);
+}
+.product-card .description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.product-card .category {
+  text-transform: uppercase;
+}
+
+.category-main {
+  position: sticky;
+  top: 8em;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  z-index: 10;
+  max-height: 50vh;
+  gap: 5px;
+}
+.category-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 10px;
+}
+
+.category-items div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.category-count {
+  font-weight: 500;
+}
+.category-items p {
+  font-weight: 500;
+  cursor: pointer;
+}
+.subcategory-container ul {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  gap: 5px;
+}
+.subcategory-container ul li {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.category-item.active {
+  font-weight: bold !important;
+}
+
+.subcategory-item.active {
+  font-weight: 600 !important;
+}
+
+.sort-filter {
+  position: relative;
+  display: inline-block;
+}
+
+.sort-select-btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.sort-select-btn span {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.sort-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1em;
+  display: inline-block;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  min-width: 250px;
+}
+
+.sort-option {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sort-option:hover {
+  background-color: #f0f0f0;
+}
+
+.sort-option:active {
+  background-color: #e1e1e1;
+}
+
+.sort-icon {
+  transition: transform 0.3s ease;
+}
+
+.sort-icon.rotated {
+  transform: rotate(45deg);
+}

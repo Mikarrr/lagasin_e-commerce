@@ -1,0 +1,108 @@
+.form-container-register {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  gap: 30px;
+  margin-top: 4em;
+  flex-wrap: wrap;
+}
+.form-container-left {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.form-container-left input[type="text"],
+.form-container-left input[type="email"],
+textarea {
+  display: flex;
+  width: 100%;
+}
+
+.button-form {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.input-required {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0;
+  font-size: 14px;
+  border-bottom: 1px solid black;
+  background-color: rgb(219, 219, 219);
+}
+
+.input-required::placeholder {
+  color: gray;
+}
+
+.input-required::placeholder::after {
+  content: " *";
+  color: black !important;
+  font-weight: bold;
+}
+.input-required:focus {
+  outline: none;
+}
+textarea,
+input {
+  text-transform: uppercase;
+}
+textarea {
+  height: 127px;
+}
+.agree {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 2em;
+}
+.agree div {
+  display: flex;
+  margin-bottom: 5px;
+  align-items: center;
+}
+.agree input {
+  margin-right: 8px;
+}
+
+.agree-text {
+  font-size: 0.8em;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.styled-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background-color: rgb(219, 219, 219);
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.styled-checkbox:checked {
+  background-color: black;
+  border-color: black;
+}
+
+.styled-checkbox:hover {
+  border-color: black;
+}
+
+@media (max-width: 1024px) {
+  .form-container-register {
+    flex-direction: column;
+    width: 100%;
+  }
+  .form-container-left {
+    width: 100%;
+  }
+}

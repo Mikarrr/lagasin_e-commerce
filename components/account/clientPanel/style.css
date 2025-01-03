@@ -1,0 +1,213 @@
+.account-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 8em 2em 8em 2em;
+  z-index: 1;
+  gap: 30px;
+}
+
+.active {
+  font-weight: 500;
+}
+.account-container-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 5px;
+  width: 25%;
+}
+.account-container-left button {
+  text-align: left;
+}
+
+.account-container-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 50%;
+}
+.account-container-right-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.account-container-right-profile-top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.account-container-right-profile .input-up {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.account-container-right-profile .info-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.info-field hr {
+  border-top: 1px solid black;
+  margin-top: 1em;
+}
+.info-field-up {
+  display: flex;
+  justify-content: space-between;
+}
+.info-field-up div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-field-down {
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.5s ease-in-out, opacity 0.8s ease-in-out;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.info-field-down.show {
+  height: 120px;
+  opacity: 1;
+}
+.info-field-down-message-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.info-field-down input::placeholder,
+.info-field-down select::placeholder {
+  color: gray;
+}
+
+.info-field-down input:focus,
+.info-field-down select:focus {
+  outline: none;
+}
+
+input,
+select {
+  text-transform: uppercase;
+}
+
+.info-field-down input {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0;
+  font-size: 14px;
+  border-bottom: 1px solid black;
+
+  background-color: rgb(219, 219, 219);
+}
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+  width: 100%; /* Dostosuj szerokość wg potrzeby */
+}
+
+.custom-select select {
+  width: 100%;
+  padding: 5px;
+  padding-right: 10px; /* Miejsce na strzałkę */
+  font-size: 14px;
+  border-bottom: 1px solid black;
+
+  background-color: rgb(219, 219, 219);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.custom-select::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 6px;
+  background-image: url("/arrow.svg");
+  background-size: cover;
+  pointer-events: none;
+}
+
+.account-container-right-orders {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.account-container-right-orders-top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.order-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.order-item {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+}
+.order-summary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.small-info {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.order-item hr {
+  border-top: 1px solid black;
+  margin-bottom: 2em;
+}
+.order-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, opacity 0.8s ease-in-out;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order-details.show {
+  max-height: 500px;
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .account-container-right {
+    width: 60%;
+  }
+}
+@media (max-width: 745px) {
+  .account-container {
+    flex-direction: column;
+    width: 100%;
+  }
+  .account-container-right,
+  .account-container-left {
+    width: 100%;
+  }
+}

@@ -1,0 +1,116 @@
+.single-product-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 6em;
+  padding: 2em 2em;
+  gap: 40px;
+}
+
+.product-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 55%;
+}
+
+.product-images img {
+  flex: 1 1 calc(50% - 10px);
+  max-width: calc(50% - 10px);
+}
+
+.product-details {
+  padding-top: 4em;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 45%;
+}
+.product-details h1 {
+  font-size: 1.3em !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif !important;
+}
+.product-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+}
+.product-description .price {
+  font-weight: 600;
+}
+
+.color-selection,
+.size-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.color-selection label,
+.size-selection label {
+  font-weight: 500;
+}
+.notification {
+  margin-top: 10px;
+  font-size: 14px;
+  color: black;
+}
+.hidden-checkbox {
+  display: none;
+}
+
+.color-checkboxes {
+  display: flex;
+  gap: 10px;
+}
+
+.color-image {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border: 1px solid black;
+  cursor: pointer;
+  transition: border 0.3s ease, transform 0.3s ease;
+}
+
+.color-image.selected {
+  border: 2px solid black;
+  transform: scale(1.05);
+}
+
+.size-checkboxes {
+  display: flex;
+  gap: 10px;
+}
+
+.size-label {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+}
+
+.styled-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background-color: rgb(219, 219, 219);
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.styled-checkbox:checked {
+  background-color: black;
+  border-color: black;
+}
+
+.styled-checkbox:hover {
+  border-color: black;
+}

@@ -1,0 +1,69 @@
+.about-us-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 8em;
+  padding: 8em 2em 2em 2em;
+  z-index: 1;
+  gap: 30px;
+}
+
+.about-us-container-up {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.about-us-container-down {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  width: 100%;
+}
+
+.about-us-container-down .image-left {
+  height: 60vh;
+  width: 40%;
+  background-image: url("/exp-about-us.webp");
+  background-size: cover;
+  background-position: center;
+  border-radius: calc(0.3rem - 1px);
+}
+
+.about-us-container-down .image-right {
+  height: 120vh;
+  width: 60%;
+  background-image: url("/exp2-about-us.webp");
+  background-size: cover;
+  background-position: center;
+  border-radius: calc(0.3rem - 1px);
+}
+
+@media (max-width: 1024px) {
+  .about-us-container-up {
+    width: 90%;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-us-container-down {
+    flex-direction: column;
+  }
+
+  .about-us-container-down .image-left {
+    height: 70vh;
+    width: 100%;
+  }
+  .about-us-container-down .image-right {
+    display: none;
+  }
+}
+
+@media (max-width: 724px) {
+  .about-us-container-up {
+    width: 100%;
+  }
+}
