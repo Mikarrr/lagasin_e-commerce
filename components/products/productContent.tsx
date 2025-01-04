@@ -38,7 +38,6 @@ const ProductContent = ({
     []
   );
 
-  // Filtrowanie produktów na podstawie wybranej kategorii
   const filteredProducts = useMemo(() => {
     return selectedCategory
       ? products.filter((product) =>
@@ -49,7 +48,6 @@ const ProductContent = ({
       : products;
   }, [products, selectedCategory]);
 
-  // Funkcja do sortowania produktów
   const sortedProducts = useMemo(() => {
     switch (sortOption) {
       case "name-asc":
@@ -106,7 +104,7 @@ const ProductContent = ({
                     className="image"
                     width={500}
                     height={500}
-                    priority // ensures the image is prioritized for loading
+                    priority
                   />
                   <div className="description">
                     <div>

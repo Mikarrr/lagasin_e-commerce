@@ -1,8 +1,6 @@
 import React from "react";
-import SingleProductContent from "@/components/products/singleProduct/singleProductContent";
-import FaqSection from "@/components/utils/faq/faq";
-import MoreProductSection from "@/components/products/moreProduct/MoreProduct";
 import { Product } from "@/app/api/types/product";
+import SingleProductSection from "@/components/products/singleProduct/singleProductSection";
 
 export const generateMetadata = async ({
   params,
@@ -155,14 +153,15 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
   );
   const variants = await variantsResponse.json();
 
-  // Get the main category of the product
   const mainCategory = product.categories[0]?.slug;
 
   return (
     <main>
-      <SingleProductContent product={product} variants={variants} />
-      <MoreProductSection categorySlug={mainCategory} />
-      <FaqSection />
+      <SingleProductSection
+        product={product}
+        variants={variants}
+        mainCategory={mainCategory}
+      />
     </main>
   );
 };

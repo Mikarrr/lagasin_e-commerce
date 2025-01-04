@@ -9,7 +9,7 @@ export async function GET() {
   while (true) {
     const response = await fetch(
       `${process.env.WORDPRESS_API_URL}/wp-json/wc/v3/products/categories?consumer_key=${process.env.WOO_API_CONSUMER}&consumer_secret=${process.env.WOO_API_SECRET}&per_page=${perPage}&page=${page}&_fields=id,name,slug,parent,count`,
-      { cache: "no-cache" }
+      { cache: "no-store" }
     );
 
     if (!response.ok) {

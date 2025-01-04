@@ -1,6 +1,7 @@
 import React from "react";
 import SinglePostPage from "@/components/fashionShow/singlePost/SinglePost";
 import { notFound } from "next/navigation";
+
 export const generateMetadata = async ({
   params,
 }: {
