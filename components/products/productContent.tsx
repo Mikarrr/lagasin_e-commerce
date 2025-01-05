@@ -3,13 +3,14 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { Product } from "@/app/api/types/product";
 import { Category } from "@/app/api/types/productCategory";
-import "./style.css";
 import CategoryFilter from "./categoryFilter";
 import SortFilter from "./sortFilter";
 import CountFilter from "./countFilter";
 import ButtonRevFill from "../utils/buttonRevFill/page";
 import Link from "next/link";
 import Image from "next/image";
+import Filter from "./filterFIlter";
+import "./style.css";
 
 const ProductContent = ({
   products,
@@ -26,6 +27,10 @@ const ProductContent = ({
   const [sortOption, setSortOption] = useState<
     "name-asc" | "name-desc" | "price-asc" | "price-desc"
   >("name-asc");
+  const [priceRange, setPriceRange] = useState<{
+    min: number | null;
+    max: number | null;
+  }>({ min: null, max: null });
 
   const handleCategoryChange = useCallback((categoryId: number | null) => {
     setSelectedCategory(categoryId);
@@ -38,15 +43,30 @@ const ProductContent = ({
     []
   );
 
+  const handlePriceRangeChange = useCallback(
+    (min: number | null, max: number | null) => {
+      setPriceRange({ min, max });
+    },
+    []
+  );
+
   const filteredProducts = useMemo(() => {
-    return selectedCategory
-      ? products.filter((product) =>
-          product.categories.some(
+    return products.filter((product) => {
+      const matchesCategory = selectedCategory
+        ? product.categories.some(
             (category) => category.id === selectedCategory
           )
-        )
-      : products;
-  }, [products, selectedCategory]);
+        : true;
+
+      const matchesPrice =
+        (priceRange.min === null ||
+          parseFloat(product.price) >= priceRange.min) &&
+        (priceRange.max === null ||
+          parseFloat(product.price) <= priceRange.max);
+
+      return matchesCategory && matchesPrice;
+    });
+  }, [products, selectedCategory, priceRange]);
 
   const sortedProducts = useMemo(() => {
     switch (sortOption) {
@@ -80,9 +100,12 @@ const ProductContent = ({
       />
       <div className="products-con">
         <div className="products-filter">
-          <SortFilter onSortChange={handleSortChange} />
+          <div className="products-filter-left">
+            <Filter onPriceRangeChange={handlePriceRangeChange} />
+            <SortFilter onSortChange={handleSortChange} />
+          </div>
           <CountFilter
-            products={products}
+            products={filteredProducts}
             selectedCategory={selectedCategory}
           />
         </div>
@@ -102,7 +125,7 @@ const ProductContent = ({
                     src={product.images[0]?.src || "/placeholder.png"}
                     alt={product.images[0]?.alt || "Product Image"}
                     className="image"
-                    width={500}
+                    width={1200}
                     height={500}
                     priority
                   />

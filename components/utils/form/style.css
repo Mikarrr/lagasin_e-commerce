@@ -63,11 +63,11 @@ textarea {
 }
 .agree div {
   display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 10px;
   margin-bottom: 5px;
   align-items: center;
-}
-.agree input {
-  margin-right: 8px;
 }
 
 .agree-text {
@@ -106,5 +106,11 @@ textarea {
   .form-container-left,
   .form-container-right {
     width: 100%;
+  }
+}
+@media (max-width: 450px) {
+  .styled-checkbox {
+    width: 28px !important;
+    height: 18px;
   }
 }

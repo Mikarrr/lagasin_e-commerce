@@ -95,7 +95,7 @@ const BlogSection = async () => {
               <div key={post.id} className="section-two-description">
                 <div>
                   <p>{getCategoryName(post.categories[0])}</p>
-                  <h3>{decode(post.title.rendered)}</h3>
+                  <h2>{decode(post.title.rendered)}</h2>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: decode(post.excerpt?.rendered || ""),

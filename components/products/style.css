@@ -21,7 +21,11 @@
   justify-content: space-between;
   width: 100%;
 }
-
+.products-filter-left {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
 .products-main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -32,7 +36,6 @@
 .product-card {
   display: flex;
   flex-direction: column;
-
   gap: 10px;
 }
 
@@ -160,4 +163,110 @@
 
 .sort-icon.rotated {
   transform: rotate(45deg);
+}
+
+.filter-container {
+  position: relative;
+}
+
+.filter-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+}
+.filter-toggle span {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.price-filter {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  gap: 20px;
+  position: fixed;
+  top: 0;
+  right: -550px;
+  width: 550px;
+  height: 100%;
+  background-color: #f4f4f4;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease-in-out;
+  padding: 20px;
+  padding-top: 5em;
+  z-index: 999999999999;
+}
+.price-filter.open {
+  right: 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.close-btn img {
+  display: block;
+}
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filter-icon {
+  transition: transform 0.3s ease;
+}
+
+.filter-icon.rotated {
+  transform: rotate(90deg);
+}
+
+@media (max-width: 1024px) {
+  .products-content-container {
+    flex-direction: column;
+  }
+  .products-con,
+  .category-main {
+    width: 100%;
+  }
+  .category-main {
+    position: static;
+  }
+
+  .price-filter {
+    right: -100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 899px) {
+  .products-main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 30px;
+    width: 100%;
+  }
+  .products-filter {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+}
+@media (max-width: 724px) {
+  .products-main {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr) !important;
+    gap: 30px;
+    width: 100%;
+  }
 }

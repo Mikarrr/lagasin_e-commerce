@@ -66,4 +66,7 @@
 }
 
 @media (max-width: 799px) {
+  .products-buttons {
+    display: none;
+  }
 }

@@ -6,7 +6,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "./style.css";
 import ButtonRevFill from "../buttonRevFill/page";
-import ButtonRev from "../buttonRev/page";
 
 interface FormData {
   name: string;
@@ -136,7 +135,7 @@ const Form = () => {
               />
               <span className="agree-text">
                 I agree to the processing of my data in accordance with the
-                <ButtonRev param="Privacy Policy" size="small" color="black" />
+                Privacy Policy
               </span>
             </div>
             {errors.agree && <p>{errors.agree.message}</p>}

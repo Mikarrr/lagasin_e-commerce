@@ -114,3 +114,22 @@
 .styled-checkbox:hover {
   border-color: black;
 }
+
+@media (max-width: 1200px) {
+  .product-images img:last-child {
+    display: none;
+  }
+  .product-images img {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+@media (max-width: 800px) {
+  .single-product-container {
+    flex-direction: column-reverse;
+  }
+  .product-images,
+  .product-details {
+    width: 100%;
+  }
+}
