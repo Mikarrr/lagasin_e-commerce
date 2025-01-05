@@ -26,7 +26,7 @@ const Filter = ({
   };
 
   return (
-    <div className="filter-container">
+    <div className="filter-all-container">
       <button className="filter-toggle" onClick={toggleFilter}>
         <Image
           src="/filter.svg"

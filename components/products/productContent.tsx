@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useCallback } from "react";
+
 import { Product } from "@/app/api/types/product";
 import { Category } from "@/app/api/types/productCategory";
 import CategoryFilter from "./categoryFilter";
@@ -11,6 +12,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Filter from "./filterFIlter";
 import "./style.css";
+import { motion } from "framer-motion";
 
 const ProductContent = ({
   products,
@@ -101,7 +103,7 @@ const ProductContent = ({
       <div className="products-con">
         <div className="products-filter">
           <div className="products-filter-left">
-            <Filter onPriceRangeChange={handlePriceRangeChange} />
+            <Filter onPriceRangeChange={handlePriceRangeChange} />{" "}
             <SortFilter onSortChange={handleSortChange} />
           </div>
           <CountFilter
@@ -114,40 +116,52 @@ const ProductContent = ({
           {sortedProducts.length === 0 ? (
             <div>Brak produktów do wyświetlenia.</div>
           ) : (
-            sortedProducts.map((product) => (
+            sortedProducts.map((product, index) => (
               <div key={product.id} className="product-card">
-                <Link
-                  href={`/products/${product.categories[1]?.slug}/${
-                    product.categories[0]?.slug || product.categories[0]?.slug
-                  }/${product.slug}`}
+                <motion.div
+                  initial={{ y: "10vh", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ x: "100vh", opacity: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 20,
+                    delay: index * 0.1,
+                  }}
                 >
-                  <Image
-                    src={product.images[0]?.src || "/placeholder.png"}
-                    alt={product.images[0]?.alt || "Product Image"}
-                    className="image"
-                    width={1200}
-                    height={500}
-                    priority
-                  />
-                  <div className="description">
-                    <div>
-                      <p className="category text-s">
-                        {product.categories
-                          .map((category) => category.name)
-                          .join(", ")}
-                      </p>
-                      <p className="text-xl">{product.name}</p>
-                      <p>{product.price} PLN</p>
-                    </div>
-
-                    <ButtonRevFill
-                      param="SHOW MORE"
-                      size="small"
-                      color="white"
-                      bgcolor="black"
+                  <Link
+                    href={`/products/${product.categories[1]?.slug}/${
+                      product.categories[0]?.slug || product.categories[0]?.slug
+                    }/${product.slug}`}
+                  >
+                    <Image
+                      src={product.images[0]?.src || "/placeholder.png"}
+                      alt={product.images[0]?.alt || "Product Image"}
+                      className="image"
+                      width={1200}
+                      height={500}
+                      priority
                     />
-                  </div>
-                </Link>
+                    <div className="description">
+                      <div>
+                        <p className="category text-s">
+                          {product.categories
+                            .map((category) => category.name)
+                            .join(", ")}
+                        </p>
+                        <p className="text-xl">{product.name}</p>
+                        <p>{product.price} PLN</p>
+                      </div>
+
+                      <ButtonRevFill
+                        param="SHOW MORE"
+                        size="small"
+                        color="white"
+                        bgcolor="black"
+                      />
+                    </div>
+                  </Link>
+                </motion.div>
               </div>
             ))
           )}

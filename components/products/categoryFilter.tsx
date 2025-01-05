@@ -7,7 +7,7 @@ import { useRouter, usePathname } from "next/navigation";
 
 const CategoryFilter = ({
   categories,
-  onCategoryChange,
+
   products,
 }: {
   categories: Category[];
@@ -74,7 +74,6 @@ const CategoryFilter = ({
   const handleMainCategoryChange = (categoryId: number | null) => {
     setSelectedMainCategory(categoryId);
     setSelectedSubCategory(null); // Resetujemy subkategorię, gdy zmieniamy główną kategorię
-    onCategoryChange(categoryId); // Przekazanie zmiany kategorii do rodzica
 
     // Zaktualizowanie URL
     if (categoryId === null) {
@@ -92,7 +91,6 @@ const CategoryFilter = ({
   // Handle subcategory change
   const handleSubCategoryChange = (categoryId: number | null) => {
     setSelectedSubCategory(categoryId); // Ustawiamy wybraną subkategorię
-    onCategoryChange(categoryId);
 
     // Zaktualizowanie URL
     const subCategory = categories.find(

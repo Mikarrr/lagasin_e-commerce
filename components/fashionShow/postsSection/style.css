@@ -143,4 +143,16 @@
   .post-image {
     height: 25vh;
   }
+
+  .filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    min-width: 100%;
+  }
+  .filter-container {
+    position: relative;
+    display: block;
+    min-width: 100%;
+  }
 }

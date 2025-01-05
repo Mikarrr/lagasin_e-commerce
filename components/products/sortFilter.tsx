@@ -10,26 +10,23 @@ const SortFilter = ({
 }: {
   onSortChange: (sortOption: SortOption) => void;
 }) => {
-  const [isOpen, setIsOpen] = useState(false); // Stan do zarządzania rozwinięciem listy
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSortChange = (sortOption: SortOption) => {
-    onSortChange(sortOption); // Przekazanie wybranego sposobu sortowania
-    setIsOpen(false); // Zamknij menu po wyborze
+    onSortChange(sortOption);
+    setIsOpen(false);
   };
 
   return (
     <div className="sort-filter">
-      <div
-        className="sort-select-btn"
-        onClick={() => setIsOpen(!isOpen)} // Otwórz/zakryj listę po kliknięciu
-      >
+      <div className="sort-select-btn" onClick={() => setIsOpen(!isOpen)}>
         <Image
           src="/sort.svg"
           alt="sort-icon"
           width={15}
           height={15}
           loading="lazy"
-          className={`sort-icon ${isOpen ? "rotated" : ""}`} // Dodajemy klasę, jeśli lista jest otwarta
+          className={`sort-icon ${isOpen ? "rotated" : ""}`}
         />
         <span>Sort</span>
       </div>
