@@ -9,11 +9,17 @@ import Image from "next/image";
 interface VariantSelectorProps {
   product: Product;
   variants: Variant[];
+  selectedColor: string | null;
+  onColorChange: (color: string) => void;
 }
 
-const VariantSelector = ({ product, variants }: VariantSelectorProps) => {
+const VariantSelector = ({
+  product,
+  variants,
+  selectedColor,
+  onColorChange,
+}: VariantSelectorProps) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedVariant, setSelectedVariant] = useState<Variant | null>(null);
   const [cart, setCart] = useState<Product[]>([]);
   const [notification, setNotification] = useState<string | null>(null);
@@ -28,7 +34,7 @@ const VariantSelector = ({ product, variants }: VariantSelectorProps) => {
   };
 
   const handleColorChange = (color: string) => {
-    setSelectedColor(selectedColor === color ? null : color);
+    onColorChange(color); // Call the parent handler to update the color
   };
 
   useEffect(() => {

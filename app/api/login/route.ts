@@ -5,7 +5,6 @@ export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json();
 
-    // User login attempt
     const response = await fetch(
       `${process.env.WORDPRESS_API_URL}/wp-json/jwt-auth/v1/token`,
       {
@@ -18,7 +17,6 @@ export async function POST(req: NextRequest) {
     if (!response.ok) {
       const errorMessage = await response.json();
 
-      // Custom error messages based on the error code
       let customMessage = "An error occurred during login. Please try again.";
       switch (errorMessage.code) {
         case "[jwt_auth] invalid_email":

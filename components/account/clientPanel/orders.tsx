@@ -55,7 +55,18 @@ const Orders: React.FC = () => {
   };
 
   if (error) {
-    return <p>{error}</p>;
+    return (
+      <div className="account-container-right-orders">
+        <div className="account-container-right-orders-top">
+          <h3>ORDERS</h3>
+          <p>
+            View your previous orders and their status. You can also create
+            returns or exchanges for your orders if needed.
+          </p>
+        </div>
+        <p>No orders found.</p>
+      </div>
+    );
   }
 
   if (orders === null) {

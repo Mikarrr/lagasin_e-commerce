@@ -1,93 +1,97 @@
 import { NextRequest, NextResponse } from "next/server";
+import crypto from "crypto";
+import nodemailer from "nodemailer";
+
+// Konfiguracja transportera Nodemailer
+const transporter = nodemailer.createTransport({
+  service: "gmail", // Możesz użyć innej usługi, jak SendGrid
+  auth: {
+    user: process.env.EMAIL_USER, // Twój adres e-mail
+    pass: process.env.EMAIL_PASS, // Hasło aplikacji lub hasło do konta e-mail
+  },
+});
+
+async function sendVerificationEmail(email: string, token: string) {
+  const verificationLink = `${process.env.NEXT_PUBLIC_API_URL}/api/verifyEmail/${token}`;
+  console.log("Preparing to send email. Verification link:", verificationLink);
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER, // Adres nadawcy
+    to: email,
+    subject: "Verify your email",
+    text: `Click the link to verify your email: ${verificationLink}`,
+    html: `<p>Click <a href="${verificationLink}">here</a> to verify your email.</p>`,
+  };
+
+  try {
+    console.log("Sending email to:", email);
+    await transporter.sendMail(mailOptions);
+    console.log("Email sent successfully.");
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw new Error("Failed to send verification email.");
+  }
+}
 
 export async function POST(req: NextRequest) {
   try {
-    // Receiving data from the request body
+    console.log("Received registration request.");
     const { email, password, firstName, lastName } = await req.json();
 
-    // Validate that all required fields are present
+    console.log("Request body:", { email, firstName, lastName });
+
     if (!email || !password || !firstName || !lastName) {
+      console.warn("Validation failed: Missing fields.");
       return new NextResponse(
         JSON.stringify({ message: "All fields are required." }),
-        { status: 400, headers: { "Content-Type": "application/json" } }
+        { status: 400 }
       );
     }
 
-    // Sending data to WordPress for registration
+    // Generowanie tokenu weryfikacji
+    const token = crypto.randomBytes(32).toString("hex");
+    console.log("Generated verification token:", token);
+
     const response = await fetch(
       `${process.env.WORDPRESS_API_URL}/wp-json/my-api/v1/register`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, firstName, lastName }),
+        body: JSON.stringify({
+          email,
+          password,
+          firstName,
+          lastName,
+          token,
+        }),
       }
     );
 
+    console.log("WordPress registration API response status:", response.status);
+
     if (!response.ok) {
       const errorResponse = await response.json();
-
-      // Custom error messages based on the error code
-      let customMessage =
-        "An error occurred during registration. Please try again.";
-      switch (errorResponse.code) {
-        case "[register] email_already_exists":
-          customMessage =
-            "The provided email address is already registered. Please use a different email.";
-          break;
-        case "[register] weak_password":
-          customMessage =
-            "The password is too weak. Please choose a stronger password.";
-          break;
-        case "[register] invalid_email":
-          customMessage =
-            "The provided email address is invalid. Please check and try again.";
-          break;
-        case "[register] missing_required_fields":
-          customMessage =
-            "Some required fields are missing. Please fill in all fields.";
-          break;
-        default:
-          customMessage =
-            errorResponse.message ||
-            "An error occurred during registration. Please try again.";
-          break;
-      }
-
+      console.error("WordPress API error:", errorResponse);
       return new NextResponse(
-        JSON.stringify({ message: customMessage, details: errorResponse }),
-        {
-          status: response.status,
-          headers: { "Content-Type": "application/json" },
-        }
+        JSON.stringify({ message: errorResponse.message }),
+        { status: response.status }
       );
     }
 
-    const result = await response.json();
+    // Wysyłanie e-maila z linkiem weryfikacyjnym
+    console.log("Sending verification email to:", email);
+    await sendVerificationEmail(email, token);
+    console.log("Verification email sent successfully.");
 
-    if (result.message !== "Registration successful") {
-      return new NextResponse(
-        JSON.stringify({ message: "Registration failed. Please try again." }),
-        { status: 500, headers: { "Content-Type": "application/json" } }
-      );
-    }
-
-    // Registration successful
     return new NextResponse(
-      JSON.stringify({ message: "Registration successful!" }),
-      {
-        status: 201,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+      JSON.stringify({ message: "Check your email to verify your account!" }),
+      { status: 201 }
     );
   } catch (error) {
     console.error("Registration failed:", error);
     return new NextResponse(
-      JSON.stringify({
-        message: "An unexpected error occurred. Please try again later.",
-      }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
+      JSON.stringify({ message: "An unexpected error occurred." }),
+      { status: 500 }
     );
   }
 }

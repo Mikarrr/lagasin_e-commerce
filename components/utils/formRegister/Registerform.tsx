@@ -55,7 +55,6 @@ const RegisterForm = () => {
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
-      // Sending data to the custom WordPress endpoint
       const response = await fetch("/api/register", {
         method: "POST",
         headers: {
@@ -66,18 +65,20 @@ const RegisterForm = () => {
 
       if (!response.ok) {
         const errorResponse = await response.json();
-        const customMessage =
-          errorResponse.message || "Registration error. Please try again.";
-        setStatusMessage(customMessage);
+        setStatusMessage(errorResponse.message || "Registration error.");
         return;
       }
 
       const result = await response.json();
-      setStatusMessage(result.message || "Registration successful!");
-      router.push("/login");
+      setStatusMessage(
+        result.message || "Check your email to verify your account!"
+      );
+
+      // Przekierowanie do strony oczekiwania na weryfikację
+      router.push("/email-verification");
     } catch (error) {
       console.error("Registration error:", error);
-      setStatusMessage("An unexpected error occurred. Please try again.");
+      setStatusMessage("An unexpected error occurred.");
     }
   };
 

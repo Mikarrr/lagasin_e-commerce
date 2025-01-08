@@ -85,6 +85,11 @@ const LoginForm = () => {
         case "[jwt_auth] invalid_credentials":
           setStatusMessage("Invalid credentials. Please try again.");
           break;
+        case "[jwt_auth] inactive_account":
+          setStatusMessage(
+            "Your account is inactive. Please contact your administrator."
+          );
+          break;
         default:
           setStatusMessage(
             result.message ||

@@ -27,7 +27,7 @@ const CategoryFilter = ({
 
   useEffect(() => {
     const pathParts = pathname.split("/"); // Dzieli URL na segmenty
-    const currentCategorySlug = pathParts[2]; // products/[category] -> [2] zawiera kategorię
+    const currentCategorySlug = pathParts[2];
     const currentSubCategorySlug = pathParts[3]; // products/[category]/[subcategory] -> [3] zawiera subkategorię
 
     // Znajdź kategorię odpowiadającą slug

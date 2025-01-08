@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Product } from "@/app/api/types/product";
 import { Variant } from "@/app/api/types/variants";
 import "./style.css";
@@ -14,17 +16,34 @@ const SingleProductContent = ({
   product,
   variants,
 }: SingleProductContentProps) => {
+  // State to manage the selected color and image
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+
+  // Function to handle color selection change
+  const handleColorChange = (color: string) => {
+    setSelectedColor(color);
+  };
+
+  // Find the image corresponding to the selected color
+  const selectedImage = selectedColor
+    ? variants.find((variant) =>
+        variant.attributes.some(
+          (attr) => attr.name === "color" && attr.option === selectedColor
+        )
+      )?.image?.src || product.images[0]?.src
+    : product.images[0]?.src;
+
   return (
     <section className="single-product-container">
       <div className="product-images">
         <Image
-          src={product.images[0]?.src}
+          src={selectedImage}
           alt={product.name}
           width={500}
           height={500}
         />
         <Image
-          src={product.images[1]?.src || product.images[0]?.src}
+          src={selectedImage}
           alt={product.name}
           width={500}
           height={500}
@@ -35,7 +54,12 @@ const SingleProductContent = ({
         <h1>{product.name}</h1>
         <div className="product-description">
           <div dangerouslySetInnerHTML={{ __html: product.description }} />
-          <VariantSelector product={product} variants={variants} />
+          <VariantSelector
+            product={product}
+            variants={variants}
+            selectedColor={selectedColor}
+            onColorChange={handleColorChange}
+          />
         </div>
       </div>
     </section>

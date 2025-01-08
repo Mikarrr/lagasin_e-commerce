@@ -1,4 +1,3 @@
-// ProductsSection.tsx
 import React from "react";
 import ProductContent from "./productContent";
 
