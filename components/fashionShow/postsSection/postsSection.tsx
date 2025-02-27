@@ -2,7 +2,6 @@
 import React from "react";
 import PostsPageContent from "./postsContent";
 import "./style.css";
-import defaultFetchOptions from "@/components/utils/fetchOptions/fetchOptions";
 
 const PostsPage = async () => {
   try {
@@ -10,7 +9,7 @@ const PostsPage = async () => {
       `${process.env.NEXT_PUBLIC_API_URL}/api/blog/posts`,
       {
         method: "GET",
-        ...defaultFetchOptions,
+        cache: "no-cache",
       }
     );
 
@@ -20,7 +19,7 @@ const PostsPage = async () => {
       `${process.env.NEXT_PUBLIC_API_URL}/api/blog/category`,
       {
         method: "GET",
-        ...defaultFetchOptions,
+        cache: "no-cache",
       }
     );
 
