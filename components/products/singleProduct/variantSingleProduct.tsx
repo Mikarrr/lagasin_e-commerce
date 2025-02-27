@@ -196,7 +196,7 @@ const VariantSelector = ({
                       checked={selectedSize === size}
                       onChange={() => handleSizeChange(size)}
                     />
-                    {size}
+                    <span>{size}</span>
                   </label>
                 )
             )}

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useMemo, useCallback } from "react";
-
+import React, { useState, useMemo } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Product } from "@/app/api/types/product";
 import { Category } from "@/app/api/types/productCategory";
 import CategoryFilter from "./categoryFilter";
@@ -23,6 +23,9 @@ const ProductContent = ({
   categories: Category[];
   initialCategoryId?: number | null;
 }) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const perPage = 6;
   const [selectedCategory, setSelectedCategory] = useState<number | null>(
     initialCategoryId || null
   );
@@ -32,25 +35,34 @@ const ProductContent = ({
   const [priceRange, setPriceRange] = useState<{
     min: number | null;
     max: number | null;
-  }>({ min: null, max: null });
+  }>({
+    min: null,
+    max: null,
+  });
 
-  const handleCategoryChange = useCallback((categoryId: number | null) => {
+  const currentPage = useMemo(() => {
+    const page = parseInt(searchParams.get("page") || "1", 10);
+    return isNaN(page) || page <= 0 ? 1 : page;
+  }, [searchParams]);
+
+  const handlePageChange = (page: number) => {
+    router.push(`?page=${page}`);
+  };
+
+  const handleCategoryChange = (categoryId: number | null) => {
     setSelectedCategory(categoryId);
-  }, []);
+    handlePageChange(1);
+  };
 
-  const handleSortChange = useCallback(
-    (sortOption: "name-asc" | "name-desc" | "price-asc" | "price-desc") => {
-      setSortOption(sortOption);
-    },
-    []
-  );
+  const handleSortChange = (
+    sortOption: "name-asc" | "name-desc" | "price-asc" | "price-desc"
+  ) => {
+    setSortOption(sortOption);
+  };
 
-  const handlePriceRangeChange = useCallback(
-    (min: number | null, max: number | null) => {
-      setPriceRange({ min, max });
-    },
-    []
-  );
+  const handlePriceRangeChange = (min: number | null, max: number | null) => {
+    setPriceRange({ min, max });
+  };
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
@@ -71,27 +83,28 @@ const ProductContent = ({
   }, [products, selectedCategory, priceRange]);
 
   const sortedProducts = useMemo(() => {
+    const sorted = [...filteredProducts];
     switch (sortOption) {
       case "name-asc":
-        return [...filteredProducts].sort((a, b) =>
-          a.name.localeCompare(b.name)
-        );
+        return sorted.sort((a, b) => a.name.localeCompare(b.name));
       case "name-desc":
-        return [...filteredProducts].sort((a, b) =>
-          b.name.localeCompare(a.name)
-        );
+        return sorted.sort((a, b) => b.name.localeCompare(a.name));
       case "price-asc":
-        return [...filteredProducts].sort(
-          (a, b) => parseFloat(a.price) - parseFloat(b.price)
-        );
+        return sorted.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
       case "price-desc":
-        return [...filteredProducts].sort(
-          (a, b) => parseFloat(b.price) - parseFloat(a.price)
-        );
+        return sorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
       default:
-        return filteredProducts;
+        return sorted;
     }
   }, [filteredProducts, sortOption]);
+
+  const paginatedProducts = useMemo(() => {
+    const start = (currentPage - 1) * perPage;
+    const end = start + perPage;
+    return sortedProducts.slice(start, end);
+  }, [sortedProducts, currentPage, perPage]);
+
+  const totalPages = Math.ceil(sortedProducts.length / perPage);
 
   return (
     <section className="products-content-container">
@@ -103,20 +116,52 @@ const ProductContent = ({
       <div className="products-con">
         <div className="products-filter">
           <div className="products-filter-left">
-            <Filter onPriceRangeChange={handlePriceRangeChange} />{" "}
+            <Filter onPriceRangeChange={handlePriceRangeChange} />
             <SortFilter onSortChange={handleSortChange} />
           </div>
-          <CountFilter
-            products={filteredProducts}
-            selectedCategory={selectedCategory}
-          />
+          <div className="products-filter-right">
+            {" "}
+            <CountFilter
+              products={filteredProducts}
+              selectedCategory={selectedCategory}
+            />
+            <div className="pagination">
+              {totalPages > 1 && (
+                <>
+                  {Array.from({ length: totalPages }, (_, index) => index + 1)
+                    .filter(
+                      (page) =>
+                        page === 1 || // Pokaż stronę 1
+                        page === totalPages || // Pokaż stronę ostatnią
+                        (page >= currentPage - 1 && page <= currentPage + 1) // Pokaż sąsiednie strony
+                    )
+                    .map((page, index, pages) => (
+                      <>
+                        {index > 0 && pages[index - 1] !== page - 1 && (
+                          <span>-</span> // Pokazuje "..." pomiędzy stronami
+                        )}
+                        <button
+                          key={page}
+                          className={`page-button ${
+                            currentPage === page ? "active" : ""
+                          }`}
+                          onClick={() => handlePageChange(page)}
+                        >
+                          <p>{page}</p>
+                        </button>
+                      </>
+                    ))}
+                </>
+              )}
+            </div>
+          </div>
         </div>
 
         <div className="products-main">
-          {sortedProducts.length === 0 ? (
+          {paginatedProducts.length === 0 ? (
             <div>Brak produktów do wyświetlenia.</div>
           ) : (
-            sortedProducts.map((product, index) => (
+            paginatedProducts.map((product, index) => (
               <div key={product.id} className="product-card">
                 <motion.div
                   initial={{ y: "10vh", opacity: 0 }}
@@ -164,6 +209,36 @@ const ProductContent = ({
                 </motion.div>
               </div>
             ))
+          )}
+        </div>
+        <br />
+        <div className="pagination">
+          {totalPages > 1 && (
+            <>
+              {Array.from({ length: totalPages }, (_, index) => index + 1)
+                .filter(
+                  (page) =>
+                    page === 1 || // Pokaż stronę 1
+                    page === totalPages || // Pokaż stronę ostatnią
+                    (page >= currentPage - 1 && page <= currentPage + 1) // Pokaż sąsiednie strony
+                )
+                .map((page, index, pages) => (
+                  <>
+                    {index > 0 && pages[index - 1] !== page - 1 && (
+                      <span>-</span> // Pokazuje "..." pomiędzy stronami
+                    )}
+                    <button
+                      key={page}
+                      className={`page-button ${
+                        currentPage === page ? "active" : ""
+                      }`}
+                      onClick={() => handlePageChange(page)}
+                    >
+                      <p>{page}</p>
+                    </button>
+                  </>
+                ))}
+            </>
           )}
         </div>
       </div>

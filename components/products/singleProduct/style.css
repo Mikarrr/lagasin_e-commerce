@@ -114,7 +114,9 @@
 .styled-checkbox:hover {
   border-color: black;
 }
-
+.size-label span {
+  line-height: 1.1 !important;
+}
 @media (max-width: 1200px) {
   .product-images img:last-child {
     display: none;

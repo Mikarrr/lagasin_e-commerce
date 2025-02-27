@@ -3,8 +3,7 @@ import { Post } from "../../types/posts";
 
 export async function GET(): Promise<NextResponse> {
   const response = await fetch(
-    `${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/posts?_embed&_fields=_links.wp:featuredmedia,_embedded.wp:featuredmedia,id,title,slug,content,categories,excerpt`,
-    { cache: "no-cache" }
+    `${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/posts?_embed&_fields=_links.wp:featuredmedia,_embedded.wp:featuredmedia,id,title,slug,content,categories,excerpt`
   );
 
   if (!response.ok) {

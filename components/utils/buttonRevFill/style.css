@@ -48,3 +48,8 @@
 .rev-button-fill:hover p:last-child {
   transform: translateY(-100%);
 }
+@media (max-width: 1024px) {
+  .rev-button-fill {
+    padding: 0.8em 1.5em;
+  }
+}

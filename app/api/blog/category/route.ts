@@ -5,8 +5,7 @@ import { Category } from "../../types/category"; // Typ Category
 // Funkcja GET do pobierania kategorii
 export async function GET(): Promise<NextResponse> {
   const response = await fetch(
-    `${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/categories?&_fields=id,name`,
-    { cache: "no-cache" }
+    `${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/categories?&_fields=id,name`
   );
 
   if (!response.ok) {

@@ -25,9 +25,9 @@ body {
   text-size-adjust: 100%;
   max-width: 2650px;
   margin: 0 auto;
-  background: rgb(219, 219, 219);
   width: 100vw;
   overflow-x: hidden;
+  background: rgb(219, 219, 219);
 }
 
 a,
@@ -54,7 +54,7 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(2rem, 1.8125rem + 0.8333vw, 2.8125rem);
+  font-size: clamp(1.75rem, 1.5048rem + 1.0897vw, 2.8125rem);
   line-height: 115%;
   margin: 0;
   padding: 0;

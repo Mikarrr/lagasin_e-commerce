@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 4005",
+    "dev": "next dev -p 4006",
     "build": "next build",
-    "start": "next start -p 4005",
+    "start": "next start -p 4006",
     "lint": "next lint"
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
     "@hookform/resolvers": "^3.9.1",
     "cookie": "^1.0.2",
+    "framer-motion": "^11.17.0",
     "gsap": "^3.12.5",
     "html-entities": "^2.5.2",
     "i18n-iso-countries": "^7.13.0",
@@ -24,6 +25,7 @@
     "react-dom": "^18",
     "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.53.2",
+    "swr": "^2.3.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {

@@ -7,7 +7,6 @@ import { useRouter, usePathname } from "next/navigation";
 
 const CategoryFilter = ({
   categories,
-
   products,
 }: {
   categories: Category[];

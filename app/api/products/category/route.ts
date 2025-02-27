@@ -4,30 +4,40 @@ import { Category } from "@/app/api/types/productCategory";
 export async function GET() {
   let allCategories: Category[] = [];
   let page = 1;
-  const perPage = 100; // Maximum number of items per page
+  const perPage = 100;
 
-  while (true) {
-    const response = await fetch(
-      `${process.env.WORDPRESS_API_URL}/wp-json/wc/v3/products/categories?consumer_key=${process.env.WOO_API_CONSUMER}&consumer_secret=${process.env.WOO_API_SECRET}&per_page=${perPage}&page=${page}&_fields=id,name,slug,parent,count`,
-      { cache: "no-store" }
-    );
-
-    if (!response.ok) {
-      return NextResponse.json(
-        { error: "Failed to fetch categories" },
-        { status: response.status }
+  try {
+    while (true) {
+      const response = await fetch(
+        `${process.env.WORDPRESS_API_URL}/wp-json/wc/v3/products/categories?consumer_key=${process.env.WOO_API_CONSUMER}&consumer_secret=${process.env.WOO_API_SECRET}&per_page=${perPage}&page=${page}&_fields=id,name,slug,parent,count`
       );
+
+      if (!response.ok) {
+        return NextResponse.json(
+          { error: "Failed to fetch categories" },
+          { status: response.status }
+        );
+      }
+
+      const categories: Category[] = await response.json();
+
+      if (categories.length === 0) {
+        break;
+      }
+
+      allCategories = allCategories.concat(categories);
+      page++;
     }
 
-    const categories: Category[] = await response.json();
-
-    if (categories.length === 0) {
-      break;
-    }
-
-    allCategories = allCategories.concat(categories);
-    page++;
+    return NextResponse.json(allCategories, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch {
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json(allCategories);
 }

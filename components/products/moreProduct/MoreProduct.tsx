@@ -5,6 +5,7 @@ import "./style.css";
 
 import Link from "next/link";
 import Image from "next/image";
+import defaultFetchOptions from "@/components/utils/fetchOptions/fetchOptions";
 
 interface MoreProductSectionProps {
   categorySlug: string | undefined;
@@ -17,7 +18,7 @@ const MoreProductSection = async ({
     ` ${process.env.NEXT_PUBLIC_API_URL}/api/products/products`,
     {
       method: "GET",
-      cache: "no-store",
+      ...defaultFetchOptions,
     }
   );
 

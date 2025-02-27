@@ -1,6 +1,7 @@
 import React from "react";
 import SinglePostPage from "@/components/fashionShow/singlePost/SinglePost";
 import { notFound } from "next/navigation";
+import defaultFetchOptions from "@/components/utils/fetchOptions/fetchOptions";
 
 export const generateMetadata = async ({
   params,
@@ -13,7 +14,7 @@ export const generateMetadata = async ({
     `${process.env.NEXT_PUBLIC_API_URL}/api/blog/singlePost/${slug}`,
     {
       method: "GET",
-      cache: "no-store",
+      ...defaultFetchOptions,
     }
   );
   const post0 = await postResponse.json();
@@ -131,7 +132,7 @@ const FashionShowSingle = async ({ params }: { params: { slug: string } }) => {
     `${process.env.NEXT_PUBLIC_API_URL}/api/blog/posts`,
     {
       method: "GET",
-      cache: "no-store",
+      ...defaultFetchOptions,
     }
   );
   const posts = await postsResponse.json();
@@ -140,7 +141,7 @@ const FashionShowSingle = async ({ params }: { params: { slug: string } }) => {
     `${process.env.NEXT_PUBLIC_API_URL}/api/blog/category`,
     {
       method: "GET",
-      cache: "no-store",
+      ...defaultFetchOptions,
     }
   );
   const categories = await categoriesResponse.json();
@@ -149,7 +150,7 @@ const FashionShowSingle = async ({ params }: { params: { slug: string } }) => {
     `${process.env.NEXT_PUBLIC_API_URL}/api/blog/singlePost/${slug}`,
     {
       method: "GET",
-      cache: "no-store",
+      ...defaultFetchOptions,
     }
   );
   const post0 = await postResponse.json();

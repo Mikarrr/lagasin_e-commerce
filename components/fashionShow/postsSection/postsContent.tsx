@@ -31,10 +31,10 @@ const PostsPageContent = ({
   };
 
   const getThumbnailUrl = (post: Post) => {
-    const media = post._embedded?.["wp:featuredmedia"]?.[0]; // Dodajemy optional chaining
+    const media = post._embedded?.["wp:featuredmedia"]?.[0];
     return media && media.media_details?.sizes?.full?.source_url
       ? media.media_details.sizes.full.source_url
-      : "/default-image.jpg"; // Możesz ustawić domyślny obraz, jeśli brak zdjęcia
+      : "/default-image.jpg";
   };
 
   return (
@@ -47,7 +47,7 @@ const PostsPageContent = ({
 
       <div className="posts-grid">
         {filteredPosts.map((post) => {
-          const thumbnailUrl = getThumbnailUrl(post); // Pobieramy URL miniaturki
+          const thumbnailUrl = getThumbnailUrl(post);
 
           return (
             <article key={post.id} className="post" lang="pl">

@@ -1,4 +1,4 @@
-import ProductsSection from "@/components/products/productsSection";
+import ProductSection from "@/components/products/productSection";
 import { Metadata } from "next";
 import React from "react";
 
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
 const Products = () => {
   return (
     <main>
-      <ProductsSection />
+      <ProductSection />
     </main>
   );
 };

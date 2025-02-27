@@ -1,6 +1,7 @@
 import React from "react";
 import { Product } from "@/app/api/types/product";
 import SingleProductSection from "@/components/products/singleProduct/singleProductSection";
+import defaultFetchOptions from "@/components/utils/fetchOptions/fetchOptions";
 
 export const generateMetadata = async ({
   params,
@@ -13,8 +14,8 @@ export const generateMetadata = async ({
   const productResponse = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/products/product/${slug}`,
     {
+      ...defaultFetchOptions,
       method: "GET",
-      cache: "no-store",
     }
   );
   const product: Product = await productResponse.json();
@@ -128,8 +129,8 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
   const productResponse = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/products/product/${slug}`,
     {
+      ...defaultFetchOptions,
       method: "GET",
-      cache: "no-store",
     }
   );
   const product: Product = await productResponse.json();
@@ -147,8 +148,8 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
   const variantsResponse = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/products/variants/${product.id}`,
     {
+      ...defaultFetchOptions,
       method: "GET",
-      cache: "no-store",
     }
   );
   const variants = await variantsResponse.json();

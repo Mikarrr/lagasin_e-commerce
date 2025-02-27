@@ -8,11 +8,7 @@ export async function GET(
   const { slug } = params;
 
   const response = await fetch(
-    `${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/posts?slug=${slug}&_embed`,
-    {
-      method: "GET",
-      cache: "no-store",
-    }
+    `${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/posts?slug=${slug}&_embed`
   );
 
   if (!response.ok) {

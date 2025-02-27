@@ -16,8 +16,7 @@ export async function GET(
 
   try {
     const response = await fetch(
-      `${process.env.WORDPRESS_API_URL}/wp-json/wc/v3/products?slug=${slug}&consumer_key=${process.env.WOO_API_CONSUMER}&consumer_secret=${process.env.WOO_API_SECRET}&_fields=id,name,slug,price,categories,images,attributes, yoast_head_json,description`,
-      { cache: "no-cache" }
+      `${process.env.WORDPRESS_API_URL}/wp-json/wc/v3/products?slug=${slug}&consumer_key=${process.env.WOO_API_CONSUMER}&consumer_secret=${process.env.WOO_API_SECRET}&_fields=id,name,slug,price,categories,images,attributes, yoast_head_json,description`
     );
 
     if (!response.ok) {

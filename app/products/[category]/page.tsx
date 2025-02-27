@@ -1,31 +1,31 @@
 import React from "react";
-
 import ProductContent from "@/components/products/productContent";
 import { Product } from "@/app/api/types/product";
+import defaultFetchOptions from "@/components/utils/fetchOptions/fetchOptions";
 
 const CategoryPage = async ({ params }: { params: { category: string } }) => {
+  const selectedCategorySlug = params.category;
+
   const productsResponse = await fetch(
-    ` ${process.env.NEXT_PUBLIC_API_URL}/api/products/products`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/products/products`,
     {
+      ...defaultFetchOptions,
       method: "GET",
-      cache: "no-store",
     }
   );
-
   const products = await productsResponse.json();
 
   const categoriesResponse = await fetch(
-    ` ${process.env.NEXT_PUBLIC_API_URL}/api/products/category`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/products/category`,
     {
+      ...defaultFetchOptions,
       method: "GET",
-      cache: "no-store",
     }
   );
 
   const categories = await categoriesResponse.json();
 
-  const selectedCategorySlug = params.category;
-
+  // Find the selected category based on the slug
   const selectedCategory = categories.find(
     (category: Product) => category.slug === selectedCategorySlug
   );

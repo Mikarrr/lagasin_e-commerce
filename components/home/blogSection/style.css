@@ -128,4 +128,8 @@
     width: 100%;
     padding: 2em 3em;
   }
+  .blog-container-down .section-one .section-one-description div div,
+  .blog-container-down .section-two .section-two-description div div {
+    display: none;
+  }
 }

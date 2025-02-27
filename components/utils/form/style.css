@@ -108,9 +108,3 @@ textarea {
     width: 100%;
   }
 }
-@media (max-width: 450px) {
-  .styled-checkbox {
-    width: 28px !important;
-    height: 18px;
-  }
-}
