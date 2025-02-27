@@ -7,12 +7,13 @@ import Link from "next/link";
 import Image from "next/image";
 
 const NewArrivalsSection = async () => {
-  const [productsResponse] = await Promise.all([
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/products`, {
-      cache: "no-cache",
+  const productsResponse = await fetch(
+    ` ${process.env.NEXT_PUBLIC_API_URL}/api/products/products`,
+    {
+      cache: "no-store",
       method: "GET",
-    }),
-  ]);
+    }
+  );
 
   const products = await productsResponse.json();
 
