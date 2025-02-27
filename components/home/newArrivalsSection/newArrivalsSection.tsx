@@ -5,16 +5,14 @@ import "./style.css";
 
 import Link from "next/link";
 import Image from "next/image";
-import defaultFetchOptions from "@/components/utils/fetchOptions/fetchOptions";
 
 const NewArrivalsSection = async () => {
-  const productsResponse = await fetch(
-    ` ${process.env.NEXT_PUBLIC_API_URL}/api/products/products`,
-    {
+  const [productsResponse] = await Promise.all([
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products/products`, {
+      cache: "no-cache",
       method: "GET",
-      ...defaultFetchOptions,
-    }
-  );
+    }),
+  ]);
 
   const products = await productsResponse.json();
 
